@@ -9,5 +9,8 @@
     "restangular": "~1.4.0",
     "bootstrap": "~3.3.2",
     "lodash": "~2.4.1"
+  },
+  "resolutions": {
+    "angular": "1.3.13"
   }
 }
