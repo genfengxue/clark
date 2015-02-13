@@ -11,10 +11,10 @@ del = require("del")
 
 paths =
   coffee: ["app/**/*.coffee"]
-  less: ["app/**/*.less", "!app/components/**/*.less"]
+  less: ["app/**/*.less", "!app/bower_components/**/*.less"]
   scripts: [".tmp/**/*.js"]
   styles: [".tmp/**/*.css"]
-  components: 'app/components'
+  bowerComponents: 'app/bower_components'
   index: '.tmp/index.html'
   tmp: '.tmp/'
 
@@ -52,12 +52,12 @@ gulp.task "inject:js", ->
 gulp.task "bower", ->
   jsSources =
     gulp.src(bowerFiles(filter: /.js$/),
-      base: paths.components
+      base: paths.bowerComponents
       read: false
     )
   cssSources =
     gulp.src(bowerFiles(filter: /.css$/),
-      base: paths.components
+      base: paths.bowerComponents
       read: false
     )
   gulp.src(paths.index)
