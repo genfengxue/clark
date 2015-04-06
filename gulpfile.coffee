@@ -8,6 +8,7 @@ connect = require('gulp-connect')
 bowerFiles = require("main-bower-files")
 runSequence = require("run-sequence")
 del = require("del")
+historyApiFallback = require('connect-history-api-fallback')
 
 paths =
   coffee: ["app/**/*.coffee"]
@@ -87,6 +88,8 @@ gulp.task 'server', ->
     root: ['.tmp', '.']
     port: 9002
     livereload: true
+    middleware: ()->
+       [ historyApiFallback ]
 
 gulp.task 'default', ->
   runSequence(
