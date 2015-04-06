@@ -11,10 +11,10 @@ del = require("del")
 
 paths =
   coffee: ["app/**/*.coffee"]
-  less: ["app/**/*.less", "!app/bower_components/**/*.less"]
-  scripts: [".tmp/**/*.js"]
+  less: ["app/**/*.less", "!bower_components/**/*.less"]
+  scripts: [".tmp/**/*.js", ".tmp/**/**/*.js"]
   styles: [".tmp/**/*.css"]
-  bowerComponents: 'app/bower_components'
+  bowerComponents: './bower_components'
   index: '.tmp/index.html'
   tmp: '.tmp/'
 

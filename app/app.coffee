@@ -1,6 +1,9 @@
 'use strict'
 
-angular.module('galeApp', [
+angular.module('clarkApp', [
+  'ipCookie'
+  'ngStorage'
+  'ui.router'
   'restangular'
 ])
 .config (RestangularProvider) ->
@@ -15,9 +18,13 @@ angular.module('galeApp', [
       data
 
 .run (
+  Auth
   $rootScope
   Restangular
 ) ->
+  $rootScope.Auth = Auth
+
+
 
   console.log 'Hello World'
   $rootScope.name = 'Zhenkun Ou'

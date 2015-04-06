@@ -1,9 +1,9 @@
 {
-  "name": "gale",
+  "name": "clark",
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lutaoact/gale_client.git"
+    "url": "https://github.com/genfengxue/clark.git"
   },
   "devDependencies": {
     "coffee-script": "^1.8.0",
