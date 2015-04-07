@@ -68,7 +68,7 @@ angular.module('clarkApp', [
 ) ->
   $rootScope.Auth = Auth
 
-
+  Auth.refreshCurrentUser()
 
 #  console.log 'Hello World'
 #  $rootScope.name = 'Zhenkun Ou'

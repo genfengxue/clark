@@ -26,6 +26,10 @@
 
 <body ng-app="clarkApp">
 
+  <div id="navbar"
+       ng-if="!webview"
+       ng-include="'app/components/navbar/navbar.html'"></div>
+
   <div ui-view="" class="fadeIn"></div>
 
 </body>

@@ -22,6 +22,7 @@ angular.module('clarkApp')
   login: (user) ->
     deferred = $q.defer()
     $http.post('/auth/local', user).success (data) =>
+      ipCookie 'token', data.token
       $rootScope.$emit 'loginSuccess'
       deferred.resolve @refreshCurrentUser()
     .error (err) =>
@@ -64,24 +65,27 @@ angular.module('clarkApp')
 
   @return {Boolean}
   ###
-  hasRole: (roleRequired, role) ->
-    userRoles = [
-      'user'      # 允许登录后的用户 abstract
-      'editor'    # 允许编辑别人的文章
-      'admin'     # 允许管理员或以上
-      'superuser' # 允许超级用户
-    ]
-    userRoles.indexOf(currentUser.role ? role) >= userRoles.indexOf(roleRequired)
-
-  userRole : ->
-    currentUser.role
+#  hasRole: (roleRequired, role) ->
+#    userRoles = [
+#      'user'      # 允许登录后的用户 abstract
+#      'editor'    # 允许编辑别人的文章
+#      'admin'     # 允许管理员或以上
+#      'superuser' # 允许超级用户
+#    ]
+#    userRoles.indexOf(currentUser.role ? role) >= userRoles.indexOf(roleRequired)
+#
+#  userRole : ->
+#    currentUser.role
 
   ###
   Check if a user is logged in
 
   @return {Boolean}
   ###
-  isLoggedIn: -> currentUser._id?
+  isLoggedIn: ->
+#    console.log currentUser
+    currentUser.userNo?
+
 
   ###
   Get auth token

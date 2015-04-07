@@ -9,7 +9,7 @@ angular.module('clarkApp').controller 'LoginCtrl', ($scope, Auth, $location, $wi
     if form.$valid
       # Logged in, redirect to home
       Auth.login(
-        email: $scope.user.email
+        userNo: $scope.user.userNo
         password: $scope.user.password
       ).then(->
         $location.path '/'
