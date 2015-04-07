@@ -4,11 +4,11 @@ angular.module('clarkApp').controller 'NavbarCtrl', ($scope, $location, Auth) ->
   $scope.menu = [
     {
       title: 'Home'
-      link: '/'
+      state: 'main'
     },
     {
       title: 'Questions'
-      link: '/questions'
+      state: 'questions'
     }
   ]
   $scope.isCollapsed = true
@@ -19,6 +19,3 @@ angular.module('clarkApp').controller 'NavbarCtrl', ($scope, $location, Auth) ->
   $scope.logout = ->
     Auth.logout()
     $location.path '/login'
-
-  $scope.isActive = (route) ->
-    route is $location.path()
