@@ -1,0 +1,11 @@
+<div>
+  <span>Course: {{question.courseNo}} Lession: {{question.lessonNo}} sentence:  {{question.sentenceNo}} </span>
+  <p>{{question.keywordString}}</p>
+  <div ng-repeat="msg in question.msgList">
+    {{msg.isTeacher?msg.teacherNo:question.studentNo}}: {{msg.msgText}}
+  </div>
+  <div>
+    <textarea placeholder="输入回复内容" ng-model="replyMsg"></textarea>
+  </div>
+  <button ng-click="reply()">回复</button>
+</div>

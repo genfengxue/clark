@@ -1,3 +1,5 @@
 'use strict'
 
-angular.module('clarkApp').controller 'MainCtrl', ($scope, $http, socket) ->
+angular.module('clarkApp').controller 'MainCtrl', (
+
+) ->

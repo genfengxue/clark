@@ -4,8 +4,12 @@ angular.module('clarkApp')
 
   $stateProvider
 
-  .state 'question',
+  .state 'questions',
     url: '/questions'
     templateUrl: 'app/question/question.html'
     controller: 'QuestionCtrl'
 
+  .state 'questions.detail',
+    url: '/:questionId'
+    templateUrl: 'app/question/questionDetail.html'
+    controller: 'QuestionDetailCtrl'
