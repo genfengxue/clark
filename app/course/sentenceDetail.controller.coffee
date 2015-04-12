@@ -11,4 +11,3 @@ angular.module('clarkApp').controller 'SentenceDetailCtrl', (
     $scope.sentence = _.find $scope.sentences, (sentence)->
       sentence.sentenceNo == +$state.params.sentenceNo
 
-    console.log $scope.sentence

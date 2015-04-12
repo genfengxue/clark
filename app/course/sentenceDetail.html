@@ -1,3 +1,11 @@
-<div>
-  {{sentence}}
+<div class="sentenceDetail">
+  <p>{{sentence.english}}</p>
+  <p>{{sentence.chinese}}</p>
+
+    <div class="keyPoint" ng-repeat="keyPoint in sentence.keyPoints">
+      {{keyPoint.key}}
+      <p class="kp" ng-repeat="kp in keyPoint.kps">
+        {{kp.kp.text}}
+      </p>
+    </div>
 </div>
