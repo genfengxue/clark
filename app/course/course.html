@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-2 col-sm-2">
+      <ul class="nav nav-pills nav-stacked">
+        <li ng-repeat="course in courses" ui-sref-active="active">
+          <a ui-sref="courses.courseDetail({courseNo: course.courseNo})">
+            {{course.courseNo}}. {{course.englishTitle}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-10 col-sm-10">
+      <div ui-view=""></div>
+    </div>
+  </div>
+</div>

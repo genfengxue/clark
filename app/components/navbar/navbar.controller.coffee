@@ -9,6 +9,10 @@ angular.module('clarkApp').controller 'NavbarCtrl', ($scope, $location, Auth) ->
     {
       title: 'Questions'
       state: 'questions'
+    },
+    {
+      title: 'Courses'
+      state: 'courses'
     }
   ]
   $scope.isCollapsed = true
