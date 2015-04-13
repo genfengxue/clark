@@ -1,11 +1,18 @@
 .sentenceDetail {
   .keyPoint {
     border: 2px solid #000000;
-    padding: 0 5px;
+    padding: 5px;
     margin: 10px 0;
+    *:read-only {
+      background: gray;
+    }
     .kp {
       border: 1px solid #000000;
-      margin-bottom: 5px;
+      margin: 5px 0;
+      textarea {
+        width: 100%;
+        display: block;
+      }
     }
   }
 }

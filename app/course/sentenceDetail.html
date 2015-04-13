@@ -2,10 +2,17 @@
   <p>{{sentence.english}}</p>
   <p>{{sentence.chinese}}</p>
 
-    <div class="keyPoint" ng-repeat="keyPoint in sentence.keyPoints">
-      {{keyPoint.key}}
-      <p class="kp" ng-repeat="kp in keyPoint.kps">
-        {{kp.kp.text}}
-      </p>
+
+  <div class="keyPoint" ng-repeat="keyPoint in sentence.keyPoints">
+    <input ng-readonly="!viewState.editing" ng-model="keyPoint.key">
+    <div class="kp" ng-repeat="kp in keyPoint.kps">
+      <button ng-click="kp.$editing = true">编辑</button>
+      <button ng-click="kp.$editing = false">取消</button>
+      <button ng-click="saveKeyPoint(kp.kp)">保存</button>
+      <button>删除</button>
+      <textarea rows="8" ng-readonly="!kp.$editing">{{kp.kp.text}}</textarea>
     </div>
+    <button>添加新知识点</button>
+  </div>
+  <button>添加新短语</button>
 </div>
