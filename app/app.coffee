@@ -6,8 +6,6 @@ angular.module('clarkApp', [
   'ui.router'
   'restangular'
 ])
-.constant 'configs',
-  baseUrl: 'http://localhost:9000/api'
 
 .config ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) ->
   $urlRouterProvider.otherwise('/')
@@ -18,9 +16,9 @@ angular.module('clarkApp', [
 #  $httpProvider.interceptors.push 'loadingInterceptor'
 #  $httpProvider.interceptors.push 'errorHttpInterceptor'
 
-.config (RestangularProvider) ->
+.config (RestangularProvider, configs) ->
   # add a response intereceptor
-  RestangularProvider.setBaseUrl('http://localhost:9000/api')
+  RestangularProvider.setBaseUrl(configs.baseUrl)
   RestangularProvider.setRestangularFields(id: "_id")
   RestangularProvider.addResponseInterceptor (data, operation, what, url, response, deferred) ->
     if operation is "getList" and data.results

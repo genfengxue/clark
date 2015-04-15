@@ -36,5 +36,11 @@
   <div ui-view="" class="fadeIn"></div>
 
 </body>
-
+<script>
+  // gulp build 的时候需要修改 API url
+  angular.module('clarkApp')
+    .constant('configs', {
+      baseUrl: <%- baseUrl %>,
+    })
+</script>
 </html>

@@ -12,10 +12,19 @@ del = require("del")
 historyApiFallback = require('connect-history-api-fallback')
 angularTemplatecache = require("gulp-angular-templatecache")
 usemin = require("gulp-usemin")
+replace = require("gulp-replace-task")
 
-configs =
-  match: "baseUrl"
-  replacement: "'http://data.genfengxue.com/api'"
+allConfigs =
+  localhost: [
+    match: /<%- baseUrl %>/g
+    replacement: "'http://localhost:3000/api'"
+  ]
+  production: [
+    match: /<%- baseUrl %>/g
+    replacement: "'http://data.genfengxue.com/api'"
+  ]
+
+currentConfigs = allConfigs.localhost
 
 paths =
   coffee: ["app/**/*.coffee"]
@@ -32,7 +41,8 @@ gulp.task "clean", ->
 
 gulp.task "index", (done)->
   gulp.src('app/index.html')
-    .pipe(gulp.dest(paths.tmp))
+    .pipe replace(patterns: currentConfigs)
+    .pipe gulp.dest(paths.tmp)
 
 gulp.task "coffee", ->
   gulp.src(paths.coffee)
@@ -99,6 +109,9 @@ gulp.task 'server', ->
     middleware: ()->
        [ historyApiFallback ]
 
+gulp.task 'config:production', ->
+  currentConfigs = allConfigs.production
+
 gulp.task 'usemin', ->
   gulp.src paths.index
   .pipe usemin()
@@ -114,8 +127,8 @@ gulp.task 'templates:make', ->
 
 gulp.task 'templates:concat', ->
   gulp.src [
-      paths.tmp + "app.js"
-      paths.tmp + "templates.js"
+    paths.tmp + "app.js"
+    paths.tmp + "templates.js"
   ]
   .pipe concat('app.js')
   .pipe gulp.dest(paths.tmp)
@@ -137,6 +150,7 @@ gulp.task 'default', ->
 gulp.task 'build', ->
   runSequence(
     'clean'
+    'config:production'
     'index'
     'bower'
     'coffee'
@@ -146,4 +160,5 @@ gulp.task 'build', ->
     'usemin'
     'templates:make'
     'templates:concat'
+    'server'
   )
