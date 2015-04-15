@@ -11,7 +11,6 @@ angular.module('clarkApp', [
 
 .config ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) ->
   $urlRouterProvider.otherwise('/')
-  $locationProvider.html5Mode true
   $httpProvider.interceptors.push 'authInterceptor'
   $httpProvider.interceptors.push 'urlInterceptor'
 #  $httpProvider.interceptors.push 'patchInterceptor'
@@ -70,8 +69,3 @@ angular.module('clarkApp', [
 
   Auth.refreshCurrentUser()
 
-#  console.log 'Hello World'
-#  $rootScope.name = 'Zhenkun Ou'
-#  Restangular.all('sentences').getList({lessonNo: 12})
-#  .then (result) ->
-#    console.log result
