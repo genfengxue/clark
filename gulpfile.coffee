@@ -15,16 +15,19 @@ usemin = require("gulp-usemin")
 replace = require("gulp-replace-task")
 
 allConfigs =
-  localhost: [
-    match: /<%- baseUrl %>/g
-    replacement: "'http://localhost:3000/api'"
-  ]
-  production: [
-    match: /<%- baseUrl %>/g
-    replacement: "'http://data.genfengxue.com/api'"
-  ]
+  localhost:
+    index: [
+      match: /<%- baseUrl %>/g
+      replacement: "'http://localhost:3000/api'"
+    ]
+  production:
+    index: [
+      match: /<%- baseUrl %>/g
+      replacement: "'http://data.genfengxue.com/api'"
+    ]
+    output: 'dist'
 
-currentConfigs = allConfigs.localhost
+currentConfig = allConfigs.localhost
 
 paths =
   coffee: ["app/**/*.coffee"]
@@ -41,7 +44,7 @@ gulp.task "clean", ->
 
 gulp.task "index", (done)->
   gulp.src('app/index.html')
-    .pipe replace(patterns: currentConfigs)
+    .pipe replace(patterns: currentConfig.index)
     .pipe gulp.dest(paths.tmp)
 
 gulp.task "coffee", ->
@@ -96,7 +99,6 @@ gulp.task "bower", ->
     ))
     .pipe gulp.dest(paths.tmp)
 
-# FIXME refresh the page
 gulp.task 'watch', ->
   gulp.watch(paths.coffee, ['coffee'])
   gulp.watch(paths.less, ['less'])
@@ -133,6 +135,19 @@ gulp.task 'templates:concat', ->
   .pipe concat('app.js')
   .pipe gulp.dest(paths.tmp)
 
+gulp.task 'backup', ->
+  output = currentConfig.output ? 'dist'
+  backup = output + '_backup'
+  del backup, force: true, ->
+    gulp.src [output + '/**/*.*']
+      .pipe gulp.dest(backup)
+
+gulp.task 'output', ->
+  output = currentConfig.output ? 'dist'
+  del output, force: true, ->
+    gulp.src [paths.tmp + '**/*.*']
+      .pipe gulp.dest(output)
+
 
 gulp.task 'default', ->
   runSequence(
@@ -149,6 +164,7 @@ gulp.task 'default', ->
 
 gulp.task 'build', ->
   runSequence(
+    'backup'
     'clean'
     'config:production'
     'index'
@@ -160,5 +176,5 @@ gulp.task 'build', ->
     'usemin'
     'templates:make'
     'templates:concat'
-    'server'
+    'output'
   )
