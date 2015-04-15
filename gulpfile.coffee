@@ -111,6 +111,11 @@ gulp.task 'server', ->
     middleware: ()->
        [ historyApiFallback ]
 
+###
+#
+# gulp build 部署的时候需要的task
+#
+###
 gulp.task 'config:production', ->
   currentConfigs = allConfigs.production
 
@@ -119,6 +124,7 @@ gulp.task 'usemin', ->
   .pipe usemin()
   .pipe gulp.dest(paths.tmp)
 
+# 编译 angular html 模板
 gulp.task 'templates:make', ->
   gulp.src paths.html
   .pipe angularTemplatecache(
@@ -127,6 +133,7 @@ gulp.task 'templates:make', ->
   )
   .pipe gulp.dest(paths.tmp)
 
+# 模板文件 concat 到 app 文件中
 gulp.task 'templates:concat', ->
   gulp.src [
     paths.tmp + "app.js"
@@ -135,6 +142,7 @@ gulp.task 'templates:concat', ->
   .pipe concat('app.js')
   .pipe gulp.dest(paths.tmp)
 
+# 备份 dist 目录到 dist_back
 gulp.task 'backup', ->
   output = currentConfig.output ? 'dist'
   backup = output + '_backup'
@@ -142,6 +150,7 @@ gulp.task 'backup', ->
     gulp.src [output + '/**/*.*']
       .pipe gulp.dest(backup)
 
+# build 生成的代码拷贝到 dist 目录下
 gulp.task 'output', ->
   output = currentConfig.output ? 'dist'
   del output, force: true, ->
@@ -149,6 +158,11 @@ gulp.task 'output', ->
       .pipe gulp.dest(output)
 
 
+###
+#
+# 本地开放的时候run：gulp
+#
+###
 gulp.task 'default', ->
   runSequence(
     'clean'
@@ -162,6 +176,14 @@ gulp.task 'default', ->
     'watch'
   )
 
+
+###
+#
+# 在线部署的时候run：gulp build
+# 生成的文件会在 dist 目录下; 代码在 gulp.task 'output' 的实现
+# 原来的 dist 会备份到 dist_back 目录下; 代码在 gulp.task 'backup' 实现
+#
+###
 gulp.task 'build', ->
   runSequence(
     'backup'
