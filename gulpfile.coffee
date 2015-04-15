@@ -18,7 +18,7 @@ allConfigs =
   localhost:
     index: [
       match: /<%- baseUrl %>/g
-      replacement: "'http://localhost:3000/api'"
+      replacement: "'http://localhost:9000/api'"
     ]
   production:
     index: [
@@ -117,7 +117,7 @@ gulp.task 'server', ->
 #
 ###
 gulp.task 'config:production', ->
-  currentConfigs = allConfigs.production
+  currentConfig = allConfigs.production
 
 gulp.task 'usemin', ->
   gulp.src paths.index
@@ -199,4 +199,10 @@ gulp.task 'build', ->
     'templates:make'
     'templates:concat'
     'output'
+  )
+
+gulp.task 'build-test', ->
+  runSequence(
+    'build'
+    'server'
   )
