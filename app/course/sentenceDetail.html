@@ -5,14 +5,18 @@
 
   <div class="keyPoint" ng-repeat="keyPoint in sentence.keyPoints">
     <input ng-readonly="!viewState.editing" ng-model="keyPoint.key">
+    <button>保存</button>
+    <button class="pull-right">删除</button>
     <div class="kp" ng-repeat="kp in keyPoint.kps">
-      <button ng-click="kp.$editing = true">编辑</button>
-      <button ng-click="kp.$editing = false">取消</button>
-      <button ng-click="saveKeyPoint(kp.kp)">保存</button>
-      <button>删除</button>
-      <textarea rows="8" ng-readonly="!kp.$editing">{{kp.kp.text}}</textarea>
+
+      <textarea rows="8" ng-readonly="!kp.$editing" ng-model="kp.kp.text"></textarea>
+      <button ng-click="editKeyPoint(kp)" ng-disabled="kp.$editing">编辑</button>
+      <button ng-click="saveKeyPoint(kp)" ng-disabled="!kp.$editing">保存</button>
+
+      <button ng-click="cancelKeyPoint(kp)" ng-disabled="!kp.$editing">取消</button>
+      <!--<button>删除</button>-->
     </div>
-    <button>添加新知识点</button>
+    <!--<button>添加新知识点</button>-->
   </div>
   <button>添加新短语</button>
 </div>
