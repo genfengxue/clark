@@ -1,5 +1,7 @@
   <div class="row">
-    <div class="col-md-2 col-sm-2">
+    <div class="col-md-2 col-sm-2 scroller">
+      <div class="text-center">lessons</div>
+      <hr/>
       <ul class="nav nav-pills nav-stacked">
         <li ng-repeat="lesson in lessons" ui-sref-active="active">
           <a ui-sref="courses.courseDetail.lessonDetail({lessonNo: lesson.lessonNo})">
