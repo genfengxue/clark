@@ -8,23 +8,43 @@ angular.module('clarkApp').controller 'SentenceDetailCtrl', (
 
   angular.extend $scope,
 
-    saveKeyPoint: (keyPoint)->
-      Restangular.one('key_points', keyPoint.kp._id)
-      .patch(keyPoint.kp)
+    saveKeyPointKey: (keyPoint)->
+      Restangular.one('sentences', $scope.sentence._id)
+      .one('update_key', keyPoint._id)
+      .patch({key: keyPoint.key})
       .then ->
         console.log 'succeed!'
-        keyPoint.$editing = false;
+        keyPoint.$editingKey = false;
 
       .catch (error) ->
         console.log 'error'
 
-    editKeyPoint: (keyPoint)->
-      keyPoint.$orignText = keyPoint.kp.text
-      keyPoint.$editing = true
+    editKeyPointKey: (keyPoint)->
+      keyPoint.$orignKey = keyPoint.key
+      keyPoint.$editingKey = true
 
-    cancelKeyPoint: (keyPoint)->
-      keyPoint.kp.text = keyPoint.$orignText
-      keyPoint.$editing = false;
+    cancelKeyPointKey: (keyPoint)->
+      keyPoint.key = keyPoint.$orignKey
+      keyPoint.$editingKey = false;
+
+
+    saveKp: (kp)->
+      Restangular.one('key_points', kp.kp._id)
+      .patch(kp.kp)
+      .then ->
+        console.log 'succeed!'
+        kp.$editing = false;
+
+      .catch (error) ->
+        console.log 'error'
+
+    editKp: (kp)->
+      kp.$orignText = kp.kp.text
+      kp.$editing = true
+
+    cancelKp: (kp)->
+      kp.kp.text = kp.$orignText
+      kp.$editing = false;
 
   $scope.$watch 'sentences', (value)->
     return if !value
