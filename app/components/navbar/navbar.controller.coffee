@@ -11,7 +11,7 @@ angular.module('clarkApp').controller 'NavbarCtrl', ($scope, $location, Auth) ->
       state: 'questions'
     },
     {
-      title: 'Courses'
+      title: 'KeyPoints'
       state: 'courses'
     }
   ]
