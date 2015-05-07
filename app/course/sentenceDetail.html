@@ -8,6 +8,8 @@
     <button ng-click="cancelSentence(sentence)" ng-disabled="!sentence.$editing">取消</button>
   </div>
 
+  <button ng-click="addNewKeyPoint()">添加新知识点</button>
+
   <div class="keyPoint" ng-repeat="keyPoint in sentence.keyPoints">
     <input ng-readonly="!keyPoint.$editingKey" ng-model="keyPoint.key">
     <button ng-click="editKeyPointKey(keyPoint)" ng-disabled="keyPoint.$editingKey">编辑</button>
@@ -24,5 +26,4 @@
     </div>
     <!--<button>添加新知识点</button>-->
   </div>
-  <button ng-click="addNewKeyPoint()">添加新知识点</button>
 </div>
