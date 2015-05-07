@@ -3,6 +3,7 @@
 angular.module('clarkApp').controller 'SentenceDetailCtrl', (
   $scope
   $state
+  $modal
   Restangular
 ) ->
 
@@ -68,6 +69,18 @@ angular.module('clarkApp').controller 'SentenceDetailCtrl', (
     cancelKp: (kp)->
       kp.kp.text = kp.$orignText
       kp.$editing = false;
+
+
+    addNewKeyPoint: ->
+      $modal.open
+        templateUrl: 'app/keyPoint/newKeyPoint.html'
+        controller: 'NewKeyPointCtrl'
+        windowClass: 'new-key-point-modal'
+        backdrop: 'static'
+        resolve:
+          sentence: -> $scope.sentence
+      .result.then ->
+        console.log 'wtf'
 
   $scope.$watch 'sentences', (value)->
     return if !value

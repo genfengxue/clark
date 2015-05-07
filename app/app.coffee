@@ -4,6 +4,7 @@ angular.module('clarkApp', [
   'ipCookie'
   'ngStorage'
   'ui.router'
+  'ui.bootstrap'
   'restangular'
 ])
 
