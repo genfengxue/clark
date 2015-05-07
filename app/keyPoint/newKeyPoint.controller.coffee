@@ -18,7 +18,7 @@ angular.module('clarkApp').controller 'NewKeyPointCtrl', (
       .post('new_key_point', $scope.newKeyPoint)
       .then (result)->
         sentence.keyPoints = result.keyPoints
-        console.log kp
-      $modalInstance.close()
+      .finally ->
+        $modalInstance.close()
     cancel: ->
       $modalInstance.dismiss('cancel')

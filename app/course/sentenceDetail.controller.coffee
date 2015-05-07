@@ -80,7 +80,7 @@ angular.module('clarkApp').controller 'SentenceDetailCtrl', (
         resolve:
           sentence: -> $scope.sentence
       .result.then ->
-        console.log 'wtf'
+        console.log 'succeed!'
 
   $scope.$watch 'sentences', (value)->
     return if !value
