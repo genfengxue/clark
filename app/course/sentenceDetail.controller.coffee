@@ -8,6 +8,23 @@ angular.module('clarkApp').controller 'SentenceDetailCtrl', (
 
   angular.extend $scope,
 
+    saveSentence: (sentence)->
+      Restangular.one('sentences', $scope.sentence._id)
+      .patch(_.pick(sentence, ['english', 'chinese']))
+      .then ->
+        console.log 'succeed!'
+        sentence.$editing = false;
+      .catch (error) ->
+        console.log error
+
+    editSentence: (sentence)->
+      sentence.$orign = _.pick sentence, ['english', 'chinese']
+      sentence.$editing = true
+
+    cancelSentence: (sentence)->
+      sentence =  _.merge sentence, sentence.$orign
+      sentence.$editing = false;
+
     saveKeyPointKey: (keyPoint)->
       Restangular.one('sentences', $scope.sentence._id)
       .one('update_key', keyPoint._id)
@@ -15,9 +32,8 @@ angular.module('clarkApp').controller 'SentenceDetailCtrl', (
       .then ->
         console.log 'succeed!'
         keyPoint.$editingKey = false;
-
       .catch (error) ->
-        console.log 'error'
+        console.log error
 
     editKeyPointKey: (keyPoint)->
       keyPoint.$orignKey = keyPoint.key
@@ -36,7 +52,7 @@ angular.module('clarkApp').controller 'SentenceDetailCtrl', (
         kp.$editing = false;
 
       .catch (error) ->
-        console.log 'error'
+        console.log error
 
     editKp: (kp)->
       kp.$orignText = kp.kp.text

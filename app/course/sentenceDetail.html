@@ -1,7 +1,12 @@
 <div class="col-xs-6 scroller sentenceDetail">
-  <p>{{sentence.english}}</p>
-  <p>{{sentence.chinese}}</p>
 
+  <div class="sentence">
+    <textarea rows="2" ng-readonly="!sentence.$editing" ng-model="sentence.english"></textarea>
+    <textarea rows="2" ng-readonly="!sentence.$editing" ng-model="sentence.chinese"></textarea>
+    <button ng-click="editSentence(sentence)" ng-disabled="sentence.$editing">编辑</button>
+    <button ng-click="saveSentence(sentence)" ng-disabled="!sentence.$editing">保存</button>
+    <button ng-click="cancelSentence(sentence)" ng-disabled="!sentence.$editing">取消</button>
+  </div>
 
   <div class="keyPoint" ng-repeat="keyPoint in sentence.keyPoints">
     <input ng-readonly="!keyPoint.$editingKey" ng-model="keyPoint.key">
