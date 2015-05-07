@@ -8,6 +8,7 @@ angular.module('clarkApp').controller 'NewKeyPointCtrl', (
 ) ->
 
   angular.extend $scope,
+    sentence: sentence
     newKeyPoint:
       key: null
       text: null
