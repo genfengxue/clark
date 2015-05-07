@@ -43,6 +43,14 @@ angular.module('clarkApp').controller 'SentenceDetailCtrl', (
       keyPoint.key = keyPoint.$orignKey
       keyPoint.$editingKey = false;
 
+    deleteKeyPoint: (keyPoint)->
+      Restangular.one('sentences', $scope.sentence._id)
+      .one('delete_key', keyPoint._id)
+      .patch()
+      .then (sentence)->
+        $scope.sentence.keyPoints = sentence.keyPoints
+      .catch (err) ->
+        console.log err
 
     saveKp: (kp)->
       Restangular.one('key_points', kp.kp._id)
@@ -50,7 +58,6 @@ angular.module('clarkApp').controller 'SentenceDetailCtrl', (
       .then ->
         console.log 'succeed!'
         kp.$editing = false;
-
       .catch (error) ->
         console.log error
 

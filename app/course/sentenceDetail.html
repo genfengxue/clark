@@ -13,7 +13,7 @@
     <button ng-click="editKeyPointKey(keyPoint)" ng-disabled="keyPoint.$editingKey">编辑</button>
     <button ng-click="saveKeyPointKey(keyPoint)" ng-disabled="!keyPoint.$editingKey">保存</button>
     <button ng-click="cancelKeyPointKey(keyPoint)" ng-disabled="!keyPoint.$editingKey">取消</button>
-    <button class="pull-right">删除</button>
+    <button class="pull-right" ng-click="deleteKeyPoint(keyPoint)">删除</button>
     <div class="kp" ng-repeat="kp in keyPoint.kps">
 
       <textarea rows="8" ng-readonly="!kp.$editing" ng-model="kp.kp.text"></textarea>
